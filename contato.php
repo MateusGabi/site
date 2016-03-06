@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="utf-8">
@@ -44,7 +44,7 @@
                         <h3 class="masthead-brand">Mateus Gabi ⚡</h3>
                         <nav>
                             <ul class="nav masthead-nav">
-                                <li><a href="http://mateusgabi.github.io/site/">Home</a></li>
+                                <li><a href="index.html">Home</a></li>
                                 <li><a href="portfolio.html">Portfólio</a></li>
                                 <li class="active"><a href="contato.html">Contato</a></li>
                             </ul>
@@ -57,11 +57,28 @@
                     <h2 style="display:none">Web-Designer</h2>
 
 
-                    <p class="lead">Você pode enviar um e-mail para:</p>
-                    <p class="lead">mateusgabimoreira [arroba] hotmail [ponto] com</p>
+                    <?php 
+                    
+                    if(!isset($_GET['l'])){
+                        $lang = "pt-BR";
+                    }
+                    else {
+                        $lang = "en-US";
+                    }
+                    
+                    $link = "http://localhost/site/lang/" . $lang . "/contato.json";
+                $enviar = file_get_contents($link);
+                $resultado = json_decode($enviar, true);
+                
+                // echo $link;
 
-                    <p class="lead"><a class="btn btn-lg btn-default" href="mailto:mateusgabimoreira@hotmail.com">E-mail</a> ou
-                        <a class="btn btn-lg btn-default" href="http://twitter.com/matgabi17" target="_blank">Twitter</a></p>
+                ?>
+                    <p class="lead"><?php echo $resultado["0"]; ?></p>
+                    <p class="lead"><?php echo $resultado["1"]; ?></p>
+
+                    <p class="lead"><a class="btn btn-lg btn-default" href="mailto:mateusgabimoreira@hotmail.com">E-mail</a>
+                    <?php echo $resultado["2"]; ?>
+                                            <a class="btn btn-lg btn-default" href="http://twitter.com/matgabi17" target="_blank">Twitter</a></p>
                 </div>
 
                 <div class="mastfoot">
