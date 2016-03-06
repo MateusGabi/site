@@ -55,30 +55,16 @@
                 <div class="inner cover">
                     <h1 style="display:none">Mateus Gabi</h1>
                     <h2 style="display:none">Web-Designer</h2>
-
-
-                    <?php 
-                    
-                    if(!isset($_GET['l'])){
-                        $lang = "pt-BR";
-                    }
-                    else {
-                        $lang = "en-US";
-                    }
-                    
-                    $link = "http://localhost/site/lang/" . $lang . "/contato.json";
-                $enviar = file_get_contents($link);
-                $resultado = json_decode($enviar, true);
-                
-                // echo $link;
-
-                ?>
-                    <p class="lead"><?php echo $resultado["0"]; ?></p>
-                    <p class="lead"><?php echo $resultado["1"]; ?></p>
+                    <p class="lead">
+                        Você pode enviar um e-mail para:
+                    </p>
+                    <p class="lead">
+                        mateusgabimoreira [arroba] hotmail [ponto] com
+                    </p>
 
                     <p class="lead"><a class="btn btn-lg btn-default" href="mailto:mateusgabimoreira@hotmail.com">E-mail</a>
-                    <?php echo $resultado["2"]; ?>
-                                            <a class="btn btn-lg btn-default" href="http://twitter.com/matgabi17" target="_blank">Twitter</a></p>
+                        ou
+                            <a class="btn btn-lg btn-default" href="http://twitter.com/matgabi17" target="_blank">Twitter</a></p>
                 </div>
 
                 <div class="mastfoot">
