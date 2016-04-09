@@ -36,6 +36,78 @@
         }
     </style>
 
+    <script type="text/javascript">
+        function CopyToClipboard () {
+            var input = document.getElementById ("ph");
+            var textToClipboard = input.value;
+            
+            var success = true;
+            if (window.clipboardData) { // Internet Explorer
+                window.clipboardData.setData ("Text", textToClipboard);
+            }
+            else {
+                    // create a temporary element for the execCommand method
+                var forExecElement = CreateElementForExecCommand (textToClipboard);
+
+                        /* Select the contents of the element 
+                            (the execCommand for 'copy' method works on the selection) */
+                SelectContent (forExecElement);
+
+                var supported = true;
+
+                    // UniversalXPConnect privilege is required for clipboard access in Firefox
+                try {
+                    if (window.netscape && netscape.security) {
+                        netscape.security.PrivilegeManager.enablePrivilege ("UniversalXPConnect");
+                    }
+
+                        // Copy the selected content to the clipboard
+                        // Works in Firefox and in Safari before version 5
+                    success = document.execCommand ("copy", false, null);
+                }
+                catch (e) {
+                    success = false;
+                }
+                
+                    // remove the temporary element
+                document.body.removeChild (forExecElement);
+            }
+
+            if (success) {
+                alert ("O texto foi armazenado na clipboard!");
+            }
+            else {
+                alert ("Seu browser não suporta :/");
+            }
+        }
+
+        function CreateElementForExecCommand (textToClipboard) {
+            var forExecElement = document.createElement ("div");
+                // place outside the visible area
+            forExecElement.style.position = "absolute";
+            forExecElement.style.left = "-10000px";
+            forExecElement.style.top = "-10000px";
+                // write the necessary text into the element and append to the document
+            forExecElement.textContent = textToClipboard;
+            document.body.appendChild (forExecElement);
+                // the contentEditable mode is necessary for the  execCommand method in Firefox
+            forExecElement.contentEditable = true;
+
+            return forExecElement;
+        }
+
+        function SelectContent (element) {
+                // first create a range
+            var rangeToSelect = document.createRange ();
+            rangeToSelect.selectNodeContents (element);
+
+                // select the contents
+            var selection = window.getSelection ();
+            selection.removeAllRanges ();
+            selection.addRange (rangeToSelect);
+        }
+    </script>
+
 </head>
 
 <body onload="printarFrase(), printarWordsStatus()">
@@ -75,14 +147,17 @@
 
     <section id="new">
         <div class="container">
-            <center><form id="frase"></form></center>
-            
-            <br><br>
+
+
+            <form id="frase"></form>
+            <br>
+            <br>
             <p>
-                <a class="btn btn-lg btn-success" id="new-pass" onclick="location.reload();" href="#">New Pass.</a>
+                <a class="btn btn-lg btn-warning" id="new-pass" onclick="CopyToClipboard();" href="#">Copiar para clipboard</a>
                 <a target="_blank" class="btn btn-lg btn-primary" id="fb-pass" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.mateusgabi.tk.%2Fpass&t=Pass.%204%20privacy - Get your phrase-password for free!">Share on Facebook</a>
                 <a target="_blank" class="btn btn-lg btn-info" id="tt-pass" href="https://twitter.com/intent/tweet?text=Pass. 4 privacy - Get your phrase-password for free&url=http%3A%2F%2Fwww.mateusgabi.tk%2Fpass&via=matgabi17&lang=pt&related=matgabi17">Share on Twitter</a>
-
+                <a class="btn btn-lg btn-success" id="new-pass" onclick="location.reload();" href="#">New Pass.</a>
+                
             </p>
         </div>
     </section>
@@ -90,13 +165,14 @@
     <div class="container">
         <p class="h2" id="statusWord"></p>
     </div>
-    
-    <br/><hr/>
-   
-     <footer class="footer">
-      <div class="container">
-        <p class="text-muted">Pass. 4 privacy. Desenvolvido por <a href="http://mateusgabi.tk" target="_blank">Mateus Gabi</a> e Renan Benatti.</p>
-      </div>
+
+    <br/>
+    <hr/>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">Pass. 4 privacy &mdash; versão 2.2.4. Desenvolvido por <a href="http://mateusgabi.tk" target="_blank">Mateus Gabi</a>                e Renan Benatti.</p>
+        </div>
     </footer>
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
