@@ -17,6 +17,8 @@
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    
+    <link href='https://fonts.googleapis.com/css?family=Fauna+One|Roboto+Condensed:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'/>
 
     <!-- Latest compiled and minified JavaScript -->
     <script src="js/bootstrap.min.js"></script>
@@ -27,6 +29,7 @@
     <style>
         body {
             text-align: center;
+            font-family: Fauna One;
         }
         
         section#new {
@@ -77,7 +80,7 @@
                 alert ("O texto foi armazenado na clipboard!");
             }
             else {
-                alert ("Seu browser não suporta :/");
+                alert ("Seu browser não suporta essa funcionalidade :/");
             }
         }
 
@@ -110,7 +113,7 @@
 
 </head>
 
-<body onload="printarFrase(), printarWordsStatus()">
+<body onload="getPhrasal(), printarWordsStatus()">
     <header>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
@@ -153,17 +156,17 @@
             <br>
             <br>
             <p>
-                <a class="btn btn-lg btn-warning" id="new-pass" onclick="CopyToClipboard();" href="#">Copiar para clipboard</a>
+                <a class="btn btn-lg btn-warning" id="new-pass" onclick="CopyToClipboard();" href="#">Copiar</a>
                 <a target="_blank" class="btn btn-lg btn-primary" id="fb-pass" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.mateusgabi.tk.%2Fpass&t=Pass.%204%20privacy - Get your phrase-password for free!">Share on Facebook</a>
                 <a target="_blank" class="btn btn-lg btn-info" id="tt-pass" href="https://twitter.com/intent/tweet?text=Pass. 4 privacy - Get your phrase-password for free&url=http%3A%2F%2Fwww.mateusgabi.tk%2Fpass&via=matgabi17&lang=pt&related=matgabi17">Share on Twitter</a>
-                <a class="btn btn-lg btn-success" id="new-pass" onclick="location.reload();" href="#">New Pass.</a>
+                <a class="btn btn-lg btn-success" id="new-pass" onclick="getPhrasal();" href="#">New Pass.</a>
                 
             </p>
         </div>
     </section>
 
     <div class="container">
-        <p class="h2" id="statusWord"></p>
+        <p class="h2"><script>document.write(getStatus());</script></p>
     </div>
 
     <br/>
@@ -171,7 +174,7 @@
 
     <footer class="footer">
         <div class="container">
-            <p class="text-muted">Pass. 4 privacy &mdash; versão 2.2.4. Desenvolvido por <a href="http://mateusgabi.tk" target="_blank">Mateus Gabi</a>                e Renan Benatti.</p>
+            <p class="text-muted">Pass. 4 privacy &mdash; versão <script>document.write(getVersion());</script>. Desenvolvido por <a href="http://mateusgabi.tk" target="_blank">Mateus Gabi</a>                e Renan Benatti.</p>
         </div>
     </footer>
 
