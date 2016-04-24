@@ -1,0 +1,9 @@
+body {
+    font-family: Roboto;
+}
+
+#fixed-tab-1,
+#fixed-tab-2,
+#fixed-tab-3 {
+    text-align: center;
+}

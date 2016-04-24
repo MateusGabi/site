@@ -1,186 +1,125 @@
-<!DOCTYPE html>
-
+<!doctype html>
 
 <html lang="pt-br">
 
 <head>
-    <title>Pass. 4 privacy</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Material Design Lite</title>
 
-    <meta charset='utf-8' />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="author" content="Mateus Gabi">
-    <meta name="description" content="Get your phrase-password for free!">
-    <meta name="keywords" content="Password, phrase-password, privacy, generator, creator, protect, security">
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="images/android-desktop.png">
 
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
 
-    <!-- Optional theme -->
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    
-    <link href='https://fonts.googleapis.com/css?family=Fauna+One|Roboto+Condensed:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'/>
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
 
-    <!-- Latest compiled and minified JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <link rel="shortcut icon" href="images/favicon.png">
 
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.1.3/material.teal-light_blue.min.css" />
+    <link rel="stylesheet" href="styles.css">
 
     <script src="js/engine.js"></script>
 
-    <style>
-        body {
-            text-align: center;
-            font-family: Fauna One;
-        }
-        
-        section#new {
-            padding: 10% 0;
-            background: #F9F9F9;
-            border-top: 1px solid #ccc;
-        }
-    </style>
 
-    <script type="text/javascript">
-        function CopyToClipboard () {
-            var input = document.getElementById ("ph");
-            var textToClipboard = input.value;
-            
-            var success = true;
-            if (window.clipboardData) { // Internet Explorer
-                window.clipboardData.setData ("Text", textToClipboard);
-            }
-            else {
-                    // create a temporary element for the execCommand method
-                var forExecElement = CreateElementForExecCommand (textToClipboard);
-
-                        /* Select the contents of the element 
-                            (the execCommand for 'copy' method works on the selection) */
-                SelectContent (forExecElement);
-
-                var supported = true;
-
-                    // UniversalXPConnect privilege is required for clipboard access in Firefox
-                try {
-                    if (window.netscape && netscape.security) {
-                        netscape.security.PrivilegeManager.enablePrivilege ("UniversalXPConnect");
-                    }
-
-                        // Copy the selected content to the clipboard
-                        // Works in Firefox and in Safari before version 5
-                    success = document.execCommand ("copy", false, null);
-                }
-                catch (e) {
-                    success = false;
-                }
-                
-                    // remove the temporary element
-                document.body.removeChild (forExecElement);
-            }
-
-            if (success) {
-                alert ("O texto foi armazenado na clipboard!");
-            }
-            else {
-                alert ("Seu browser não suporta essa funcionalidade :/");
-            }
-        }
-
-        function CreateElementForExecCommand (textToClipboard) {
-            var forExecElement = document.createElement ("div");
-                // place outside the visible area
-            forExecElement.style.position = "absolute";
-            forExecElement.style.left = "-10000px";
-            forExecElement.style.top = "-10000px";
-                // write the necessary text into the element and append to the document
-            forExecElement.textContent = textToClipboard;
-            document.body.appendChild (forExecElement);
-                // the contentEditable mode is necessary for the  execCommand method in Firefox
-            forExecElement.contentEditable = true;
-
-            return forExecElement;
-        }
-
-        function SelectContent (element) {
-                // first create a range
-            var rangeToSelect = document.createRange ();
-            rangeToSelect.selectNodeContents (element);
-
-                // select the contents
-            var selection = window.getSelection ();
-            selection.removeAllRanges ();
-            selection.addRange (rangeToSelect);
-        }
-    </script>
 
 </head>
 
-<body onload="getPhrasal(), printarWordsStatus()">
-    <header>
-        <nav class="navbar navbar-default">
-            <div class="container-fluid">
-                <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
-                    aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="#"><b>Pass.</b> 4 privacy</a>
-                </div>
-                <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Get Pass!<span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">Sobre</a></li>
-                        <li><a href="#">FAQ</a></li>
+<body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base" onload="getPhrasal(), printarWordsStatus()">
 
-                    </ul>
-                </div>
-                <!-- /.navbar-collapse -->
+    <!-- Simple header with fixed tabs. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
+            mdl-layout--fixed-tabs">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">Pass <small>4 Privacy</small></span>
             </div>
-        </nav>
-    </header>
+            <!-- Tabs -->
+            <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+                <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Home</a>
+                <a href="#fixed-tab-2" class="mdl-layout__tab">Sobre</a>
+                <a href="#fixed-tab-3" class="mdl-layout__tab">Faq</a>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">Title</span>
+        </div>
+        <main class="mdl-layout__content">
+            <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
+                <div class="page-content">
+                    <!-- Your content goes here -->
+                    <div class="mdl-grid">
+                        <div class="mdl-cell mdl-cell--12-col">
+                            <h5>Garanta a sua privacidade na internet de <em>graça</em>!</h5>
 
+                            <form id="frase"></form>
 
-    <div class="container">
-        <p class="h1">Garanta a sua privacidade na internet de <em>graça</em>!</p>
+                            <p>
+                                <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="new-pass" onclick="CopyToClipboard();"
+                                    href="#">Copiar</a>
+                                <a target="_blank" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="fb-pass"
+                                    href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.mateusgabi.tk.%2Fpass&t=Pass.%204%20privacy - Get your phrase-password for free!">Share on Facebook</a>
+                                <a target="_blank" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="tt-pass"
+                                    href="https://twitter.com/intent/tweet?text=Pass. 4 privacy - Get your phrase-password for free&url=http%3A%2F%2Fwww.mateusgabi.tk%2Fpass&via=matgabi17&lang=pt&related=matgabi17">Share on Twitter</a>
+                                <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="new-pass" onclick="getPhrasal();"
+                                    href="#">New Pass.</a>
+
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="mdl-layout__tab-panel" id="fixed-tab-2">
+                <div class="page-content">
+                    <!-- Your content goes here -->
+                    <div class="mdl-grid">
+                        <div class="mdl-cell mdl-cell--12-col">
+                            <h2>SOBRE</h2>
+                            <p class="h2">
+                                <script>
+                                    document.write(getStatus());
+                                </script>
+                            </p>
+
+                            <p class="text-muted">Pass. 4 privacy &mdash; versão
+                                <script>
+                                    document.write(getVersion());
+                                </script>. Desenvolvido por <a href="http://mateusgabi.tk" target="_blank">Mateus Gabi</a> e Renan Benatti.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="mdl-layout__tab-panel" id="fixed-tab-3">
+                <div class="page-content">
+                    <!-- Your content goes here -->
+                    <h2>FAQ</h2>
+                </div>
+            </section>
+        </main>
     </div>
 
-
-    <section id="new">
-        <div class="container">
+    <!-- Colored FAB button with ripple -->
 
 
-            <form id="frase"></form>
-            <br>
-            <br>
-            <p>
-                <a class="btn btn-lg btn-warning" id="new-pass" onclick="CopyToClipboard();" href="#">Copiar</a>
-                <a target="_blank" class="btn btn-lg btn-primary" id="fb-pass" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.mateusgabi.tk.%2Fpass&t=Pass.%204%20privacy - Get your phrase-password for free!">Share on Facebook</a>
-                <a target="_blank" class="btn btn-lg btn-info" id="tt-pass" href="https://twitter.com/intent/tweet?text=Pass. 4 privacy - Get your phrase-password for free&url=http%3A%2F%2Fwww.mateusgabi.tk%2Fpass&via=matgabi17&lang=pt&related=matgabi17">Share on Twitter</a>
-                <a class="btn btn-lg btn-success" id="new-pass" onclick="getPhrasal();" href="#">New Pass.</a>
-                
-            </p>
-        </div>
-    </section>
-
-    <div class="container">
-        <p class="h2"><script>document.write(getStatus());</script></p>
-    </div>
-
-    <br/>
-    <hr/>
-
-    <footer class="footer">
-        <div class="container">
-            <p class="text-muted">Pass. 4 privacy &mdash; versão <script>document.write(getVersion());</script>. Desenvolvido por <a href="http://mateusgabi.tk" target="_blank">Mateus Gabi</a>                e Renan Benatti.</p>
-        </div>
-    </footer>
-
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
 </body>
 
 </html>
