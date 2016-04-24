@@ -139,12 +139,12 @@ function CopyToClipboard() {
         document.body.removeChild(forExecElement);
     }
 
-    if (success) {
-        alert("O texto foi armazenado na clipboard!");
-    }
-    else {
-        alert("Seu browser não suporta essa funcionalidade :/");
-    }
+    // if (success) {
+    //     alert("O texto foi armazenado na clipboard!");
+    // }
+    // else {
+    //     alert("Seu browser não suporta essa funcionalidade :/");
+    // }
 }
 
 function CreateElementForExecCommand(textToClipboard) {
@@ -172,3 +172,5 @@ function SelectContent(element) {
     selection.removeAllRanges();
     selection.addRange(rangeToSelect);
 }
+
+// efeito

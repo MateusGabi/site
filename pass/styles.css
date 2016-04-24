@@ -7,3 +7,7 @@ body {
 #fixed-tab-3 {
     text-align: center;
 }
+
+h5 {
+    text-transform: uppercase;
+}

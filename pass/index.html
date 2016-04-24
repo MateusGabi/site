@@ -63,20 +63,22 @@
                         <li class="mdl-menu__item"> <a style="text-decoration:none;color:#444" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fwww.mateusgabi.tk.%2Fpass&t=Pass.%204%20privacy - Get your phrase-password for free!">Share on Facebook</a>
                         </li>
                         <li class="mdl-menu__item"><a style="text-decoration:none;color:#444" target="_blank" href="https://twitter.com/intent/tweet?text=Pass. 4 privacy - Get your phrase-password for free&url=http%3A%2F%2Fwww.mateusgabi.tk%2Fpass&via=matgabi17&lang=pt&related=matgabi17">Share on Twitter</a>
-</li>
-                        
+                        </li>
+
                     </ul>
                 </div>
             </div>
             <!-- Tabs -->
-            <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+            <div class="mdl-layout__tab-bar mdl-js-ripple-effect" style="
+    background: rgb(66, 136, 129);
+">
                 <a href="#fixed-tab-1" class="mdl-layout__tab is-active">Home</a>
                 <a href="#fixed-tab-2" class="mdl-layout__tab">Sobre</a>
                 <a href="#fixed-tab-3" class="mdl-layout__tab">Faq</a>
             </div>
         </header>
         <div class="mdl-layout__drawer">
-            <span class="mdl-layout-title">Title</span>
+            <span class="mdl-layout-title">My Account</span>
         </div>
         <main class="mdl-layout__content">
             <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
@@ -87,12 +89,33 @@
                             <h5>Garanta a sua privacidade na internet de <em>graça</em>!</h5>
 
                             <form id="frase"></form>
-
+                            <br />
                             <p>
-                                <a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="new-pass" onclick="CopyToClipboard();"
-                                    href="#">Copiar</a>
-                                <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="new-pass" onclick="getPhrasal();"
-                                    href="#">New Pass.</a>
+
+                                <button id="demo-show-toast" class="mdl-button mdl-js-button mdl-button--raised" type="button">Copiar</button>
+                                <div id="demo-toast-example" class="mdl-js-snackbar mdl-snackbar">
+                                    <div class="mdl-snackbar__text"></div>
+                                    <button class="mdl-snackbar__action" type="button"></button>
+                                </div>
+                                <script>
+                                    (function() {
+  'use strict';
+  window['counter'] = 0;
+  var snackbarContainer = document.querySelector('#demo-toast-example');
+  var showToastButton = document.querySelector('#demo-show-toast');
+  showToastButton.addEventListener('click', function() {
+    'use strict';
+    var data = {message: 'Pass copiado!'};
+    snackbarContainer.MaterialSnackbar.showSnackbar(data);
+    CopyToClipboard();
+  });
+}());
+
+                                </script>
+
+                                <!--<a class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" id="new-pass" onclick="CopyToClipboard();"
+                                    href="#">Copiar</a>-->
+                                <a class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored" id="new-pass" onclick="getPhrasal();" href="#">New Pass.</a>
 
                             </p>
 
@@ -128,7 +151,8 @@
             <section class="mdl-layout__tab-panel" id="fixed-tab-3">
                 <div class="page-content">
                     <!-- Your content goes here -->
-                    <h2>FAQ</h2>
+                    <h5>FAQ</h5>
+                    <p>FAQ ainda não disponível.</p>
                 </div>
             </section>
         </main>
