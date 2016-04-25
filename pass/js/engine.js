@@ -80,7 +80,7 @@ function getPhrasal() {
 
     }
 
-    return document.getElementById('frase').innerHTML = "<div class=\"mdl-textfield mdl-js-textfield\"><input id=\"ph\" class=\"mdl-textfield__input\" type=\"text\" placeholder=\"Carregando...\" value=\"" + retorno + "\" readonly></div>";
+    return document.getElementById('frase').innerHTML = "<div class=\"mdl-textfield mdl-js-textfield\"><input id=\"ph\" style=\"text-align:center\" class=\"mdl-textfield__input\" type=\"text\" placeholder=\"Carregando...\" value=\"" + retorno + "\" readonly></div>";
 }
 
 // Resultado Inteiro em Milhões
@@ -172,5 +172,3 @@ function SelectContent(element) {
     selection.removeAllRanges();
     selection.addRange(rangeToSelect);
 }
-
-// efeito
