@@ -42,7 +42,7 @@
     <style>
         div#gc_trends > div,
         div#search-itens > div {
-            margin: 2em;
+            margin: 1em;
         }
     </style>
 
@@ -96,9 +96,11 @@
                                 xhr.done(function (data) {
                                     console.log("success got data", data);
 
+                                    var n = data.data.length;
+
                                     var html = "";
 
-                                    for (var i = 0; i < 9; i++) {
+                                    for (var i = 0; i < n; i++) {
                                         var source = data.data[i].images.fixed_height.url;
 
                                         html += "<div class=\"mdl-card mdl-shadow--4dp\">";
@@ -138,9 +140,11 @@
                                     xhr2.done(function (data) {
                                         console.log("success got data", data);
 
+                                        var n = data.data.length;
+
                                         html = "";
 
-                                        for (var i = 0; i < 9; i++) {
+                                        for (var i = 0; i < n; i++) {
                                             var source = data.data[i].images.fixed_height.url;
 
                                             html += "<div class=\"mdl-card mdl-shadow--4dp\">";
