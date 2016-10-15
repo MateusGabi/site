@@ -1,0 +1,210 @@
+<!doctype html>
+
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <title>Material Design Lite</title>
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="images/android-desktop.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Material Design Lite">
+    <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
+    <meta name="msapplication-TileColor" content="#3372DF">
+
+    <link rel="shortcut icon" href="images/favicon.png">
+
+    <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
+    <!--
+    <link rel="canonical" href="http://www.example.com/">
+    -->
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.1/material.red-pink.min.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="assets/js/app.js"></script>
+
+    <style>
+        div#gc_trends > div,
+        div#search-itens > div {
+            margin: 2em;
+        }
+    </style>
+
+</head>
+
+<body class="mdl-demo mdl-color--grey-100 mdl-color-text--grey-700 mdl-base" onload="">
+
+    <!-- Simple header with fixed tabs. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header
+            mdl-layout--fixed-tabs">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <span class="mdl-layout-title">Giphy Client</span>
+
+                <div class="mdl-layout-spacer"></div>
+                <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable
+                  mdl-textfield--floating-label mdl-textfield--align-right">
+                    <label class="mdl-button mdl-js-button mdl-button--icon" for="fixed-header-drawer-exp">
+          <i class="material-icons">search</i>
+        </label>
+                    <div class="mdl-textfield__expandable-holder">
+                        <input class="mdl-textfield__input" onchange="search(this.value)" type="text" name="sample" id="fixed-header-drawer-exp">
+                    </div>
+                </div>
+            </div>
+            <!-- Tabs -->
+            <div class="mdl-layout__tab-bar mdl-js-ripple-effect mdl-color--red-600">
+                <a href="#fixed-tab-1" class="mdl-layout__tab is-active" onclick="Javascript:document.location.reload(true);">Início</a>
+                <a href="#fixed-tab-2" class="mdl-layout__tab">Sobre</a>
+                <a href="#fixed-tab-3" class="mdl-layout__tab">Faq</a>
+            </div>
+        </header>
+        <div class="mdl-layout__drawer">
+            <span class="mdl-layout-title">My Account</span>
+        </div>
+        <main class="mdl-layout__content mdl-typography--text-center">
+            <section class="mdl-layout__tab-panel is-active" id="fixed-tab-1">
+                <div class="page-content">
+                    <!-- Your content goes here -->
+                    <div class="mdl-grid">
+                        <div class="mdl-cell mdl-cell--12-col">
+
+                            <div id="gc_trends" class="mdl-grid"></div>                            
+                            <div id="search-itens" class="hidden mdl-grid"><h2>Nada Encontrado</h2></div>
+                            <script>     
+
+                             var xhr = $.get("http://api.giphy.com/v1/gifs/trending?api_key=dc6zaTOxFJmzC");
+
+
+                                xhr.done(function (data) {
+                                    console.log("success got data", data);
+
+                                    var html = "";
+
+                                    for (var i = 0; i < 9; i++) {
+                                        var source = data.data[i].images.fixed_height.url;
+
+                                        html += "<div class=\"mdl-card mdl-shadow--4dp\">";
+                                        html += "<div class=\"mdl-card__media\">";
+                                        html += "<center><img src=\"" + source + "\" /></center>";
+                                        html += "</div>";
+                                        html += "<div class=\"mdl-card__supporting-text\">";
+                                        html += "Adicionado em: " + data.data[i].import_datetime;
+                                        html += "<input type=\"hidden\" id=\""+ data.data[i].id +"\" value=\""+ source +"\" />";
+                                        html += "</div>";
+                                        html += "<div class=\"mdl-card__supporting-text\">";
+                                        html += "<a class=\"mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect\" href=\"JavaScript:CopyToClipboard('"+ data.data[i].id +"')\">Copiar Link</a>";
+                                        html += "</div>";
+                                        html += "</div>";
+
+                                    }
+
+                                    if (html == "") html = "Erro";
+
+                                    document.getElementById('gc_trends').innerHTML = html;
+                                });                       
+                                
+                                
+                                function search(value) {
+
+                                    console.log("valor :" + value);
+
+
+                                    $("#gc_trends").addClass("hidden");
+                                    $("#search-itens").removeClass("hidden");
+
+                                    var xhr2 = $.get("http://api.giphy.com/v1/gifs/search?q="+value+"&api_key=dc6zaTOxFJmzC");
+
+                                    var html =  "Nada Encontrado";
+
+
+                                    xhr2.done(function (data) {
+                                        console.log("success got data", data);
+
+                                        html = "";
+
+                                        for (var i = 0; i < 9; i++) {
+                                            var source = data.data[i].images.fixed_height.url;
+
+                                            html += "<div class=\"mdl-card mdl-shadow--4dp\">";
+                                            html += "<div class=\"mdl-card__media\">";
+                                            html += "<center><img src=\"" + source + "\" /></center>";
+                                            html += "</div>";
+                                            html += "<div class=\"mdl-card__supporting-text\">";
+                                            html += "Adicionado em: " + data.data[i].import_datetime;
+                                            html += "<input type=\"hidden\" id=\""+ data.data[i].id +"\" value=\""+ source +"\" />";
+                                            html += "</div>";
+                                            html += "<div class=\"mdl-card__supporting-text\">";
+                                            html += "<a class=\"mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect\" href=\"JavaScript:CopyToClipboard('"+ data.data[i].id +"')\">Copiar Link</a>";
+                                            html += "</div>";
+                                            html += "</div>";
+
+                                        }
+
+                                       $("#search-itens").html(html);
+                                    });      
+
+                                }                 
+                                
+                    
+                            </script>
+
+                        
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="mdl-layout__tab-panel" id="fixed-tab-2">
+                <div class="page-content">
+                    <!-- Your content goes here -->
+                    <div class="mdl-grid">
+                        <div class="mdl-cell mdl-cell--12-col">
+                            
+                            <h5>Versão</h5>
+                            <p>
+                                <script>
+                                    document.write(getVersion()+".4");
+                                </script>
+                            </p>
+
+                            <h5>Desenvolvido por</h5>
+                            <p><a href="http://mateusgabi.tk" target="_blank">Mateus Gabi</a></p>
+                            <script>                                
+                                document.write(getStatus());
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="mdl-layout__tab-panel" id="fixed-tab-3">
+                <div class="page-content">
+                    <!-- Your content goes here -->
+                    <h5>FAQ</h5>
+                    <p>FAQ ainda não disponível.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Colored FAB button with ripple -->
+
+    <script src="https://code.getmdl.io/1.1.3/material.min.js"></script>
+</body>
+
+</html>
